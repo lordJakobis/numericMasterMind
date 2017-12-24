@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var guess = [0,0,0,0]
     var buttonPossition = 0
     var n = Int()
+    var enterPressed = Int()
     func disableButtons(){
         var i = 0
         for _ in buttons {
@@ -25,10 +26,13 @@ class ViewController: UIViewController {
         }
     }
     func enableButtons(){
+        var i = Int()
         for _ in 1...4 {
             buttons[buttonPossition].isEnabled = true
+            buttons[buttonPossition].setTitle(String(describing: guess[i]), for: .normal)
             buttonPossition += 1
-        }
+            i += 1
+            }
     }
     
     
@@ -72,6 +76,15 @@ class ViewController: UIViewController {
             }
     }
     @IBAction func enterPress(_ sender: Any) {
+        enterPressed += 1
+        if enterPressed >= 10 {
+            answerLabel.isHidden = false
+            if guess == answer {
+                print("you won")
+            } else{
+                print("you lose")
+            }
+        } else {
         disableButtons()
         enableButtons()
         var i = Int()
@@ -94,4 +107,5 @@ class ViewController: UIViewController {
         hints[n].text = "\(hintA)/\(hintB)"
     n += 1
     }
+}
 }
